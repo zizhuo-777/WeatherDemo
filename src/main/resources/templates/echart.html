@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>显示天气</title>
+    <script src="../js/echarts.js"></script>
+</head>
+<body>
+
+<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+<div id="main" style="width: 600px;height:400px;"></div>
+<script th:inline="javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        title: {
+            text: '天气预报'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {},
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: [{
+            type: 'category',
+            boundaryGap: false,
+            data: JSON.parse([[${timeList}]])
+        },
+            {
+                type: 'category',
+                boundaryGap: false,
+                data: JSON.parse([[${weatherList}]])
+            },
+        ],
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value} °C'
+            }
+        },
+        series: [
+            {
+                name: '最高温',
+                type: 'line',
+                data: JSON.parse([[${highList}]]),
+                markPoint: {
+                    data: [
+                        { type: 'max', name: 'Max' },
+                        { type: 'min', name: 'Min' }
+                    ]
+                },
+                markLine: {
+                    data: [{ type: 'average', name: 'Avg' }]
+                }
+            },
+            {
+                name: '最低温',
+                type: 'line',
+                data: JSON.parse([[${lowList}]]),
+                markPoint: {
+                    data: [{ name: '周最低', value: [[${maxLow}]], xAxis: [[${keyLow}]], yAxis: [[${maxLow}]]}]
+                },
+                markLine: {
+                    data: [
+                        { type: 'average', name: 'Avg' },
+                        [
+                            {
+                                symbol: 'none',
+                                x: '90%',
+                                yAxis: 'max'
+                            },
+                            {
+                                symbol: 'circle',
+                                label: {
+                                    position: 'start',
+                                    formatter: 'Max'
+                                },
+                                type: 'max',
+                                name: '最高点'
+                            }
+                        ]
+                    ]
+                }
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

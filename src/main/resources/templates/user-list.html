@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+</head>
+<body>
+<table class="layui-table">
+    <tr>
+        <th>编号</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>编辑</th>
+    </tr>
+    <tr th:each="user:${userList}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td>
+            <a type="button" class="layui-btn layui-btn-normal" th:href="@{/user/update(id=${user.id})}">修改</a>
+            <a type="button" class="layui-btn layui-btn-danger" th:href="@{/user/delete(id=${user.id})}">删除</a>
+        </td>
+    </tr>
+    <p th:text="${err!=null?'操作失败':null}"></p>
+</table>
+</body>
+</html>

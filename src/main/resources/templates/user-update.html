@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改操作</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+</head>
+<body>
+<form class="layui-form" action="/user/updateEnter" method="post">
+    <!-- 隐藏的id   -->
+        <input type="hidden" th:value="${user?.id}" name="id">
+    <!-- 用户名 -->
+    <div class="layui-form-item">
+        <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+                <i class="layui-icon layui-icon-username"></i>
+            </div>
+            <input type="text" name="username" th:value="${user?.username}" lay-verify="required" placeholder="用户名"
+                   lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
+        </div>
+    </div>
+    <!-- 密码 -->
+    <div class="layui-form-item">
+        <div class="layui-input-wrap">
+            <div class="layui-input-prefix">
+                <i class="layui-icon layui-icon-password"></i>
+            </div>
+            <input type="password" name="password" th:value="${user?.password}" lay-verify="required" placeholder="密   码"
+                   lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
+        </div>
+    </div>
+    <!-- 登录 -->
+    <div class="layui-form-item">
+        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="demo-login">提交</button>
+    </div>
+</form>
+</body>
+</html>
