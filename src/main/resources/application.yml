@@ -3,6 +3,6 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://123.57.232.209:3306/Weathers?characterEncoding=utf-8
+    url: jdbc:mysql://39.101.76.249:3306/weather?characterEncoding=utf-8
     username: root
-    password: 123456
+    password: root

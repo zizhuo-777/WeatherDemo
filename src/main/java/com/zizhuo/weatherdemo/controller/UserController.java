@@ -70,7 +70,7 @@ public class UserController {
         }*/
         i = userService.insertUser(user);
         if (i > 0) {
-            return "redirect:user/list";
+            return "redirect:/user/list";
         } else {
             return "user/user-edit.html";
         }
@@ -89,7 +89,7 @@ public class UserController {
 
         int i = userService.updateById(user);
         if (i > 0) {
-            return "redirect:user/list";
+            return "redirect:/user/list";
         } else {
             return "user/user-edit.html";
         }
